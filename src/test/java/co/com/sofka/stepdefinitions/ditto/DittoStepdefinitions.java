@@ -9,9 +9,7 @@ import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import net.serenitybdd.screenplay.rest.interactions.Get;
 import org.apache.log4j.Logger;
 import org.hamcrest.Matchers;
-
 import java.util.HashMap;
-
 import static co.com.sofka.questions.APIResponse.response;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeThatResponse;
@@ -19,21 +17,19 @@ import static net.serenitybdd.screenplay.rest.questions.ResponseConsequence.seeT
 public class DittoStepdefinitions extends ServiceSetUp {
 
     private static final Logger LOGGER = Logger.getLogger(DittoStepdefinitions.class);
-
     private final HashMap<String, Object> headers = new HashMap<>();
     private final Actor actor = Actor.named("Ash");
 
     @Given("envio el request a la URL definida")
     public void envioElRequestALaURLDefinida() {
         generalSetUp();
-        actor.can(CallAnApi.at(BASE_URI));
+        actor.can(CallAnApi.at(FIRST_BASE));
     }
 
     @When("hago la peticion del servicio")
     public void hagoLaPeticionDelServicio() {
         actor.attemptsTo(Get.resource(BASE_DITTO));
     }
-
     @Then("espero la respuesta HTTP 200")
     public void esperoLaRespuestaHTTP200() {
         //LastResponse.received().answeredBy(actor).prettyPrint(); //Imprime respuesta
@@ -48,14 +44,13 @@ public class DittoStepdefinitions extends ServiceSetUp {
     @Given("envio el request a la URL base")
     public void envioElRequestALaURLBase() {
         generalSetUp();
-        actor.can(CallAnApi.at(BASE_URI));
+        actor.can(CallAnApi.at(FIRST_BASE));
     }
 
     @When("hago la peticion de manera incorrecta")
     public void hagoLaPeticionDeManeraIncorrecta(){
         actor.attemptsTo(Get.resource(SECOND_DITTO));
     }
-
     @Then("espero la respuesta HTTP 404")
     public void esperoLaRespuestaHTTP404(){
         actor.should(

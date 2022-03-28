@@ -36,12 +36,9 @@ public class FileUtilities {
         if(object.exists()) {
             deleted = object.delete();
         }
-
         LOGGER.info("¿Fue eliminado?:" + deleted + "\n\r");
-
         return deleted;
     }
-
     public static String readFile(String filePath) {
         String line;
         StringBuilder stringBuilder = new StringBuilder();
@@ -53,7 +50,6 @@ public class FileUtilities {
             LOGGER.info(ioException.getMessage() + "\r\n");
             LOGGER.info(ioException);
         }
-
         return stringBuilder.toString();
     }
 
